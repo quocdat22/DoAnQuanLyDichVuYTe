@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+
+@* @model List<DoAnQLDichVu.Models.TaiKhoanKhachHang> *@
+@model List<TK_PF_KH>
+<div class="mt-2">
+    <a asp-controller="TaiKhoanKhachHang" asp-action="DanhSachTaiKhoan" class="btn btn-primary">Danh sách tài khoản</a>
+    <table class="table table-centered mb-0">
+        <thead>
+            <tr>
+                <th>Tên khách hàng</th>
+                <th>Tên tài khoản</th>
+                <th>Ngày gửi</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var kh in Model)
+            {
+                <tr>
+                    <td>@kh.Profile.HoTen</td>
+                    <td>@kh.TaiKhoan.TenDangNhap</td>
+                    <td>@kh.TaiKhoan.ThoiGianTao</td>
+                    @* <td>@kh.TaiKhoan.TrangThai</td> *@
+                    
+                    <td class="table-action">
+                        <a asp-controller="TaiKhoanKhachHang" asp-action="TaiKhoanReject" asp-route-id="@kh.TaiKhoan.IdKhachHang" class="btn btn-danger">Từ chối</a>
+                        <a asp-controller="TaiKhoanKhachHang" asp-action="TaiKhoanAccept" asp-route-id="@kh.TaiKhoan.IdKhachHang" class="btn btn-success">Chấp nhận</a>
+                    </td>
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,74 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+@* @model List<DoAnQLDichVu.Models.ProfileKhachHang> *@
+
+<div class="mt-2">
+    <h2>Danh sách duyệt profile khách hàng</h2>
+    <table class="table table-centered mb-0">
+        <thead>
+            <tr>
+                <th>Tên Khách hàng</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                
+                <th>Tình trạng</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var kh in ViewBag.DanhSachTrangThai02)
+            {
+                <tr>
+                    <td>@kh.HoTen</td>
+                    <td>@kh.Ngaysinh</td>
+                    
+                    <td>@(kh.GioiTinh ? "Nam" : "Nữ")</td>
+                    <td>@(kh.TrangThaiXetDuyet == 0 ? "Mới" : "Bổ sung")</td>
+                    <td class="table-action">
+                        <a asp-controller="ProfileKhachHang" asp-action="ProfileReject" asp-route-id="@kh.IdKhachHang" class="btn btn-danger">Từ chối</a>
+                        <a asp-controller="ProfileKhachHang" asp-action="ProfileDetail" asp-route-id="@kh.IdKhachHang" class="btn btn-info">Xem profile</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div class="mt-5">
+    <h2>Danh sách khách hàng đang bổ sung profile</h2>
+    <table class="table table-centered mb-0">
+        <thead>
+            <tr>
+                <th>Tên Khách hàng</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>Tình trạng</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var kh in ViewBag.DanhSachTrangThai1)
+            {
+                <tr>
+                    <td>@kh.HoTen</td>
+                    <td>@kh.Ngaysinh</td>
+                    @* <td>@kh.GioiTinh</td> *@
+                    <td>@(kh.GioiTinh ? "Nam" : "Nữ")</td>
+
+                    <td>@(kh.TrangThaiXetDuyet == 1 ? "Chờ bổ sung từ khách hàng" : "")</td>
+                    <td>
+                        <a asp-controller="ProfileKhachHang" asp-action="ProfileReject" asp-route-id="@kh.IdKhachHang" class="btn btn-danger">Từ chối</a>
+                    </td>
+                    
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

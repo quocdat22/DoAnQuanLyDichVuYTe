@@ -1,0 +1,90 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+@model DoAnQLDichVu.Models.ProfileKhachHang
+<div class="card text-center">
+    <div class="card-body">
+        
+        <h4 class="mb-0 mt-2">Profile Khách Hàng</h4>
+        @* <p class="text-muted font-14">Khách hàng đã</p> *@
+        <div class="text-left mt-3">
+            <p class="text-muted mb-3 font-16">
+                <strong>Họ và tên :</strong> <span class="ml-2">
+                    @Model.HoTen
+                </span>
+            </p>
+
+            <p class="text-muted mb-3 font-16">
+                <strong>Số điện thoại :</strong><span class="ml-2">
+                    @Model.SoDienThoai
+                </span>
+            </p>
+
+            <p class="text-muted mb-3 font-16"><strong>Email :</strong> <span class="ml-2 ">@Model.Email</span></p>
+
+            <p class="text-muted mb-3 font-16"><strong>Giới tính :</strong> <span class="ml-2 ">@(Model.GioiTinh.HasValue ? (Model.GioiTinh.Value ? "Nam" : "Nữ") : "")</span></p>
+
+            <p class="text-muted mb-3 font-16"><strong>Ngày sinh :</strong> <span class="ml-2">@Model.Ngaysinh</span></p>
+
+            <p class="text-muted mb-3 font-16"><strong>Trạng thái tài khoản :</strong> 
+                @if(Model.TrangThaiTaiKhoan == 0)
+                {
+                    <span class="ml-2 text-secondary">Chưa có</span>
+                }else if(Model.TrangThaiTaiKhoan == 1)
+                {
+                    <span class="ml-2 text-info">Đang chờ xét duyệt</span>  
+                }
+                else if(Model.TrangThaiTaiKhoan == 2)
+                {
+                    <span class="ml-2 text-success">Đã xác thực</span>  
+                }
+                else
+                {
+                    <span class="ml-2 text-danger">Không xác định</span>  
+                }
+                </p>
+
+            <p class="text-muted mb-3 font-16"><strong>Trạng thái xét duyệt :</strong> 
+                @if(Model.TrangThaiXetDuyet == 0)
+                {
+                    <span class="ml-2 text-secondary">Chờ xét duyệt</span>
+                }else if(Model.TrangThaiXetDuyet == 1)
+                {
+                    <span class="ml-2 text-secondary">Chờ bổ sung từ khách hàng</span>
+                }else if (Model.TrangThaiXetDuyet == 2)
+                {
+                    <span class="ml-2 text-success">Chờ xét duyệt (bổ sung)</span>
+                }else if (Model.TrangThaiXetDuyet == 3){
+                    <span class="ml-2 text-success">Đã xác nhận</span>
+                }
+                else
+                {
+                    <span class="ml-2 text-danger">Từ chối</span>
+                }
+
+            </p>
+
+            <p class="text-muted mb-3 font-16"><strong>Thời gian tạo Profile :</strong> <span class="ml-2">@Model.ThoiGianTao</span></p>
+
+            <p class="text-muted mb-3 font-16"><strong>Thời gian cập nhật :</strong> <span class="ml-2">@Model.ThoiGianCapNhat</span></p
+            
+        </div>
+
+        @if(Model.TrangThaiXetDuyet != 3){
+            <div class="mt-4">
+                
+                <a class="btn btn-success btn-sm mb-2" href="@Url.Action("ProfileAccept","ProfileKhachHang",new { id = Model.IdKhachHang })">Chấp nhận</a>
+@*                 <button asp-controller="ProfileKhachHang" asp-action="ProfileAccept" asp-route-id="@Model.IdKhachHang" type="submit" class="btn btn-success btn-sm mb-2" >Chấp nhận</button>
+ *@                <button type="submit" class="btn btn-danger btn-sm mb-2" asp-controller="ProfileKhachHang" asp-action="ProfileAccept" asp-route-id="@Model.IdKhachHang">Từ chối</button>
+                <button type="button" class="btn btn-info btn-sm mb-2">Yêu cầu thêm thông tin</button>
+            </div>
+        }else{
+           <div>
+
+           </div>
+        }
+    </div> <!-- end card-body -->
+</div> <!-- end card -->

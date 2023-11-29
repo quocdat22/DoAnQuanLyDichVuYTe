@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+@model List<TK_PF_KH>
+
+<div class="mt-2">
+    <table class="table table-centered mb-0">
+        <thead>
+            <tr>
+                <th>Tên khách hàng</th>
+                <th>Tên tài khoản</th>
+                <th>Thời gian gửi</th>
+                <th>Trạng thái</th> 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var kh in Model)
+            {
+                <tr>
+                    <td>@kh.Profile.HoTen</td>
+                    <td>@kh.TaiKhoan.TenDangNhap</td>
+                    <td>@kh.TaiKhoan.ThoiGianTao</td>
+                    <td>@(kh.TaiKhoan.TrangThai == 0 ? "Chờ xét duyệt" : (kh.TaiKhoan.TrangThai == 1 ? "Tải khoản đang mở" : (kh.TaiKhoan.TrangThai == 2 ? "Từ chối" : "Không xác định")))</td>
+                    @* <td>@kh.TaiKhoan.TrangThai</td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
