@@ -14,7 +14,7 @@
     <link href="~/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
     <link href="~/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
@@ -104,21 +104,21 @@
                         </a>
                         <ul class="side-nav-second-level" aria-expanded="false">
                             <li>
-                                <a href="@Url.Action("Index", "NhanVien")">
+                                <a href="@Url.Action("Index", "ProfileNhanVien")">
                                     <span> Danh sách nhân viên y tế</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="@Url.Action("XetDuyetProfile", "NhanVien")">Xét duyệt profile</a>
+                                <a href="@Url.Action("XetDuyetProfile", "ProfileNhanVien")">Xét duyệt profile</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("XetDuyetTaiKhoan", "NhanVien")">Xét duyệt tài khoản</a>
+                                <a href="@Url.Action("XetDuyetTaiKhoan", "TaiKhoanNhanVien")">Xét duyệt tài khoản</a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="@Url.Action("TimKiemLichLamViec", "NhanVien")" class="side-nav-link">
+                        <a href="@Url.Action("Index", "LichLamViec")" class="side-nav-link">
                             @*<i class="uil-calender"></i>*@
                             <i class="fa-solid fa-hospital-user"></i>
                             <span> Tìm kiếm lịch làm việc </span>

@@ -1,0 +1,74 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+@* @model List<DoAnQLDichVu.Models.ProfileNhanVien> *@
+@model List<BC_PF_NV>
+<div class="mt-2">
+    <h2>Danh sách duyệt profile nhân viên</h2>
+    <table class="table table-centered mb-0">
+        <thead>
+            <tr>
+                <th>Tên nhân viên</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>Tình trạng</th>
+                <th>Bằng cấp</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var nv in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/images/users/@nv.NhanVienProfile.Avatar" alt="image" class="img-fluid avatar-xs mr-2 rounded-circle" />
+                        @nv.NhanVienProfile.HoTen
+                    </td>
+                    <td>@nv.NhanVienProfile.NgaySinh</td>
+                    
+                    <td>@(nv.NhanVienProfile.GioiTinh ? "Nam" : "Nữ")</td>
+                    <td>@(nv.NhanVienProfile.TrangThaiXetDuyet == 0 ? "Mới" : "Bổ sung")</td>
+
+                    <td>
+                        <!-- Center modal -->
+                        <button type="button" class="btn btn-link btn-rounded" data-toggle="modal" data-target="#centermodal">Xem</button>
+
+                        <div class="modal fade" id="centermodal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myCenterModalLabel">Bằng cấp</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    </div>
+                                    
+                                    
+                                    <div class="modal-body">
+                                        @foreach(var bc in @nv.DanhSachBangCap){
+                                            <div>
+                                                <p>@bc.TenBangCap</p>
+                                                <img src="~/images/bangCap/@bc.HinhAnh" style="width:430px;height:300px"/>
+                                            </div>
+                                        }
+                                    </div>
+
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                    </td>
+
+                    <td class="table-action">
+                        <a asp-controller="ProfileNhanVien" asp-action="ProfileReject" asp-route-id="@nv.NhanVienProfile.IdNhanVien" class="btn btn-danger">Từ chối</a>
+                        <a asp-controller="ProfileNhanVien" asp-action="ProfileDetail" asp-route-id="@nv.NhanVienProfile.IdNhanVien" class="btn btn-info">Xem profile</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+

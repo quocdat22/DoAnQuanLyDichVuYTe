@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+@model List<TK_NV>
+
+<table class="table table-centered .table-hover mb-0">
+    <thead>
+        <tr>
+            <th>Tên nhân viên</th>
+            <th>Thời gian bắt đầu</th>
+            <th>Thời gian kết thúc</th>
+            <th>Ca</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tk in Model)
+        {
+            <tr>
+                <td>@tk.NhanVien.HoTen</td>
+                <td>@tk.Lichlamviec[0].ThoiGianBatDau</td>
+                <td>@tk.Lichlamviec[0].ThoiGianKetThuc</td>
+                <td>@tk.Lichlamviec[0].Ca</td>
+            </tr>
+            @for (int i = 1; i < tk.Lichlamviec.Count; i++)
+            {
+                <tr>
+                    <td></td> <!-- Tên nhân viên trống để tránh hiển thị lại -->
+                    <td>@tk.Lichlamviec[i].ThoiGianBatDau</td>
+                    <td>@tk.Lichlamviec[i].ThoiGianKetThuc</td>
+                    <td>@tk.Lichlamviec[i].Ca</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

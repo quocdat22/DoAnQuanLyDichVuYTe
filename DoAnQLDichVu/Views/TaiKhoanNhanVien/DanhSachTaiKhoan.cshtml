@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<TK_PF_NV>
+
+<div class="mt-2">
+    <table class="table table-centered .table-hover mb-0">
+        <thead>
+            <tr>
+                <th>Tên nhân viên</th>
+                <th>Tên tài khoản</th>
+                <th>Ngày gửi</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var nv in Model)
+            {
+                <tr @(nv.TaiKhoan.TrangThai == 0 ? "class=table-primary " : "")>
+                    <td>@nv.Profile.HoTen</td>
+                    <td>@nv.TaiKhoan.TenDangNhap</td>
+                    <td>@nv.TaiKhoan.ThoiGianTao</td>
+                    <td>@(nv.TaiKhoan.TrangThai == 0 ? "Chờ xét duyệt" : (nv.TaiKhoan.TrangThai == 1 ? "Tải khoản đang mở" : (nv.TaiKhoan.TrangThai == 2 ? "Từ chối" : "Không xác định")))</td>
+                    @* <td>@kh.TaiKhoan.TrangThai</td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+
+@model List<DoAnQLDichVu.Models.ProfileNhanVien>
+
+
+<div class="mt-2">
+    <table class="table table-centered mb-0">
+        <thead>
+            <tr>
+                <th>Tên nhân viên</th>
+                <th>Số điện thoại</th>
+                @* <th>Địa chỉ</th> *@
+                <th>Email</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                @* <th>Thời gian tạo</th> *@
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var nv in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/images/users/@nv.Avatar" alt="image" class="img-fluid avatar-xs mr-2 rounded-circle" />
+                        @nv.HoTen
+                    </td>
+                    <td>@nv.SoDienThoai</td>
+                    @* <td>@nv.Diachi</td> *@
+                    <td>@nv.Email</td>
+                    <td>@nv.NgaySinh</td>
+                    <td>@(nv.GioiTinh ? "Nam" : "Nữ")</td>
+                    @* <td>@nv.ThoiGianTao</td> *@
+                    <td>
+                        <a asp-controller="ProfileNhanVien" asp-action="ProfileDetail" asp-route-id="@nv.IdNhanVien" class="action-icon"> <i class="mdi mdi-pencil"></i></a>
+                    </td>
+                    <!-- Thêm các cột nvác nếu cần thiết -->
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

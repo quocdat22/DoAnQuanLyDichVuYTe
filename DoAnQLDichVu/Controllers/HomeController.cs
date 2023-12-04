@@ -25,7 +25,7 @@ namespace DoAnQLDichVu.Controllers
 
             return View();
         }
-
+        [Authentication]
         public IActionResult Privacy()
         {
             return View();

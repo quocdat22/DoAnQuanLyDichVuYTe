@@ -1,4 +1,5 @@
-﻿using DoAnQLDichVu.Models;
+﻿using DoAn.Models;
+using DoAnQLDichVu.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoAnQLDichVu.Controllers
@@ -11,6 +12,7 @@ namespace DoAnQLDichVu.Controllers
         {
             _db = db;
         }
+        [Authentication]
         public IActionResult Index()
         {
             //ViewData["UserName"] = HttpContext.Session.GetString("TenTk");
@@ -21,7 +23,7 @@ namespace DoAnQLDichVu.Controllers
             .ToList();
             return View(kh);
         }
-
+        [Authentication]
         public IActionResult XetDuyetProfile()
         {
             
@@ -39,23 +41,33 @@ namespace DoAnQLDichVu.Controllers
 
             return View();
         }
-
+        [Authentication]
         public IActionResult ProfileAccept(int id)
         {
             var kh = _db.ProfileKhachHangs.FirstOrDefault(x => x.IdKhachHang == id);
-            kh.TrangThaiXetDuyet = 3;
-            _db.SaveChanges();
+            if(kh!= null)
+            {
+                kh.TrangThaiXetDuyet = 3;
+                kh.ThoiGianCapNhat = DateTime.Now;
+                _db.SaveChanges();
+            }
+            
             return RedirectToAction("XetDuyetProfile");
         }
-
+        [Authentication]
         public IActionResult ProfileReject(int id)
         {
             var kh = _db.ProfileKhachHangs.FirstOrDefault(x => x.IdKhachHang == id);
-            kh.TrangThaiXetDuyet = 4;
-            _db.SaveChanges();
+            if (kh != null)
+            {
+                kh.TrangThaiXetDuyet = 4;
+                kh.ThoiGianCapNhat = DateTime.Now;
+                _db.SaveChanges();
+            }
+            
             return RedirectToAction("XetDuyetProfile");
         }
-
+        [Authentication]
         public IActionResult ProfileDetail(int id)
         {
             

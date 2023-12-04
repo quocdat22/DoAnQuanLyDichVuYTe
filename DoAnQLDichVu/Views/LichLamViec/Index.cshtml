@@ -1,0 +1,100 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+}
+@model List<DoAnQLDichVu.Models.ProfileNhanVien>
+@* <div class="app-search dropdown mt-3">
+    <form>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search..." id="top-search">
+            <span class="mdi mdi-magnify search-icon"></span>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>       
+    </form>
+</div> *@
+
+@* <form method="post" action="/LichLamViec/TimKiem">
+    <label for="employee">Nhân viên:</label>
+    <select name="employee" id="employee">
+        <!-- Tùy chọn cho tất cả nhân viên hoặc danh sách nhân viên từ cơ sở dữ liệu -->
+        <option value="0">Tất cả</option>
+        @foreach(var i in @Model)
+        {
+            <option value="@i.IdNhanVien">@i.HoTen</option>
+        })
+    </select>
+
+    <label for="startDate">Ngày bắt đầu:</label>
+    <input type="date" name="startDate" id="startDate">
+
+    <label for="endDate">Ngày kết thúc:</label>
+    <input type="date" name="endDate" id="endDate">
+
+    <label for="shift">Ca:</label>
+    <select name="shift" id="shift">
+        <!-- Tùy chọn cho tất cả ca hoặc danh sách ca từ cơ sở dữ liệu -->
+        <option value="0">Tất cả</option>
+        <option value="1">Ca Sáng</option>
+        <option value="2">Ca Chiều</option>
+        <option value="3">Ca Tối</option>
+    </select>
+    <button type="submit">Tìm kiếm</button>
+</form> *@
+
+<form id="searchForm">
+    <label for="employee">Nhân viên:</label>
+    <select name="employee" id="employee">
+        <!-- Tùy chọn cho tất cả nhân viên hoặc danh sách nhân viên từ cơ sở dữ liệu -->
+        <option value="0">Tất cả</option>
+        @foreach (var i in @Model)
+        {
+            <option value="@i.IdNhanVien">@i.HoTen</option>
+        })
+    </select>
+
+    <label for="startDate">Ngày bắt đầu:</label>
+    <input type="date" name="startDate" id="startDate">
+
+    <label for="endDate">Ngày kết thúc:</label>
+    <input type="date" name="endDate" id="endDate">
+
+    <label for="shift">Ca:</label>
+    <select name="shift" id="shift">
+        <!-- Tùy chọn cho tất cả ca hoặc danh sách ca từ cơ sở dữ liệu -->
+        <option value="0">Tất cả</option>
+        <option value="1">Ca Sáng</option>
+        <option value="2">Ca Chiều</option>
+        <option value="3">Ca Tối</option>
+    </select>
+    <button type="submit">Tìm kiếm</button>
+</form>
+
+<div id="searchResult">
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#searchForm").submit(function (e) {
+            e.preventDefault(); // Ngăn chặn việc submit form mặc định
+
+            var formData = $(this).serialize(); // Lấy dữ liệu từ form
+
+            $.ajax({
+                url: "/LichLamViec/TimKiem", // Đường dẫn đến Action Search trong Controller
+                type: "POST",
+                data: formData,
+                success: function (result) {
+                    $("#searchResult").html(result); // Hiển thị kết quả trả về từ PartialView
+                },
+                error: function () {
+                    alert("Đã có lỗi xảy ra trong quá trình tìm kiếm.");
+                }
+            });
+        });
+    });
+</script>

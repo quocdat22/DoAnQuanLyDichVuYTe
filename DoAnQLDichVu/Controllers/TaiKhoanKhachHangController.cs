@@ -1,16 +1,18 @@
-﻿using DoAnQLDichVu.Models;
+﻿using DoAn.Models;
+using DoAnQLDichVu.Models;
 
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoAnQLDichVu.Controllers
 {
-    public class TaiKhoanKhachHang : BaseController
+    public class TaiKhoanKhachHangController : BaseController
     {
         private readonly QldichVuDangKiContext _db;
-        public TaiKhoanKhachHang(QldichVuDangKiContext db)
+        public TaiKhoanKhachHangController(QldichVuDangKiContext db)
         {
             _db = db;
         }
+        [Authentication]
         public IActionResult XetDuyetTaiKhoan()
         {
 
@@ -24,7 +26,7 @@ namespace DoAnQLDichVu.Controllers
             var model = query.ToList();
             return View(model);
         }
-
+        [Authentication]
         public IActionResult DanhSachTaiKhoan()
         {
             var query = from TaiKhoanKhachHang in _db.TaiKhoanKhachHangs
@@ -33,19 +35,32 @@ namespace DoAnQLDichVu.Controllers
             var model = query.ToList();
             return View(model);
         }
-
+        [Authentication]
         public IActionResult TaiKhoanAccept(int id)
         {
             var kh = _db.TaiKhoanKhachHangs.FirstOrDefault(x => x.IdKhachHang == id);
-            kh.TrangThai = 1;
+            var profile = _db.ProfileKhachHangs.FirstOrDefault(x => x.IdKhachHang == id);
+            if(kh!= null)
+            {
+                profile.TrangThaiTaiKhoan = 1;
+                kh.TrangThai = 1;
+                _db.SaveChanges();
+            }   
+            
             _db.SaveChanges();
             return RedirectToAction("XetDuyetTaiKhoan");
         }
-
+        [Authentication]
         public IActionResult TaiKhoanReject(int id)
         {
             var kh = _db.TaiKhoanKhachHangs.FirstOrDefault(x => x.IdKhachHang == id);
-            kh.TrangThai = 2;
+            var profile = _db.ProfileKhachHangs.FirstOrDefault(x => x.IdKhachHang == id);
+            if(kh != null)
+            {
+                profile.TrangThaiTaiKhoan = 2;
+                kh.TrangThai = 2;
+            }
+            
             _db.SaveChanges();
             return RedirectToAction("XetDuyetTaiKhoan");
         }

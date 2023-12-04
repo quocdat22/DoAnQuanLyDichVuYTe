@@ -19,7 +19,7 @@
         <tbody>
             @foreach (var kh in Model)
             {
-                <tr>
+                <tr @(kh.TaiKhoan.TrangThai == 0 ? "class=table-primary " : "")>
                     <td>@kh.Profile.HoTen</td>
                     <td>@kh.TaiKhoan.TenDangNhap</td>
                     <td>@kh.TaiKhoan.ThoiGianTao</td>

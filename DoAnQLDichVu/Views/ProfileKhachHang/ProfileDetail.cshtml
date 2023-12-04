@@ -78,7 +78,7 @@
                 
                 <a class="btn btn-success btn-sm mb-2" href="@Url.Action("ProfileAccept","ProfileKhachHang",new { id = Model.IdKhachHang })">Chấp nhận</a>
 @*                 <button asp-controller="ProfileKhachHang" asp-action="ProfileAccept" asp-route-id="@Model.IdKhachHang" type="submit" class="btn btn-success btn-sm mb-2" >Chấp nhận</button>
- *@                <button type="submit" class="btn btn-danger btn-sm mb-2" asp-controller="ProfileKhachHang" asp-action="ProfileAccept" asp-route-id="@Model.IdKhachHang">Từ chối</button>
+ *@                <button type="submit" class="btn btn-danger btn-sm mb-2" asp-controller="ProfileKhachHang" asp-action="ProfileReject" asp-route-id="@Model.IdKhachHang">Từ chối</button>
                 <button type="button" class="btn btn-info btn-sm mb-2">Yêu cầu thêm thông tin</button>
             </div>
         }else{
